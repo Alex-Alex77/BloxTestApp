@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mKm-ma-kwG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eEH-JB-F3N">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,16 +12,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Git Hub View Controller-->
+        <!--Search repositories-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="GitHubViewController" customModule="BloxTestApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SearchViewController" customModule="BloxTestApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fg-Dn-ppg">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Enter repository you want to find" id="71Q-iV-dX1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -78,20 +78,43 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7qf-tI-t9A"/>
+                    <navigationItem key="navigationItem" title="Search repositories" id="7qf-tI-t9A"/>
                     <connections>
+                        <outlet property="backgroundView" destination="Efb-mn-fOm" id="sbq-NQ-goq"/>
+                        <outlet property="backgroundViewLabel" destination="HEU-lj-czm" id="1E6-KB-e4b"/>
                         <outlet property="searchBar" destination="71Q-iV-dX1" id="Jqh-55-CDK"/>
                         <outlet property="tableView" destination="7fg-Dn-ppg" id="13d-xc-dJX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="Efb-mn-fOm">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find repositories, try to change your request" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEU-lj-czm">
+                            <rect key="frame" x="15" y="0.0" width="210" height="128"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="8UX-YS-eIm" firstAttribute="bottom" secondItem="HEU-lj-czm" secondAttribute="bottom" id="9bj-Ws-lUf"/>
+                        <constraint firstItem="HEU-lj-czm" firstAttribute="leading" secondItem="8UX-YS-eIm" secondAttribute="leading" constant="15" id="PRm-zd-zNC"/>
+                        <constraint firstItem="HEU-lj-czm" firstAttribute="trailing" secondItem="8UX-YS-eIm" secondAttribute="trailing" constant="-15" id="X1X-PP-t6O"/>
+                        <constraint firstItem="HEU-lj-czm" firstAttribute="top" secondItem="8UX-YS-eIm" secondAttribute="top" id="vUn-Wg-hxv"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="8UX-YS-eIm"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+            <point key="canvasLocation" x="2015.2" y="132.68365817091455"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Wof-01-kcw">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mKm-ma-kwG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="sZU-Yz-Sfm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kxY-zP-LOF">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -104,7 +127,114 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dq9-3F-ecM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="133"/>
+            <point key="canvasLocation" x="1120.8" y="132.68365817091455"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="fvo-Pa-RYw">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eEH-JB-F3N" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7kE-eL-NcC">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="mKm-ma-kwG" kind="relationship" relationship="viewControllers" id="2Qw-3J-Dtb"/>
+                        <segue destination="H3r-Cz-rKc" kind="relationship" relationship="viewControllers" id="kBR-OI-y5o"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uKT-c2-oK1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181.59999999999999" y="132.68365817091455"/>
+        </scene>
+        <!--My repositories-->
+        <scene sceneID="asM-W9-lBy">
+            <objects>
+                <viewController storyboardIdentifier="UserRepositoriesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jCL-nO-fv4" customClass="UserRepositoriesViewController" customModule="BloxTestApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xmw-iT-1mA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="y3h-nc-Czc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepositoryCell" rowHeight="105" id="bSS-3Z-Xnp" customClass="RepositoryCell" customModule="BloxTestApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="105"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bSS-3Z-Xnp" id="Mcq-9u-ZVA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="104.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-xm-AT3">
+                                                    <rect key="frame" x="15" y="10" width="360" height="84.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1N-a0-wP6">
+                                                            <rect key="frame" x="0.0" y="0.0" width="360" height="20.5"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHL-7H-7sN">
+                                                            <rect key="frame" x="0.0" y="28.5" width="360" height="56"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="0bv-xm-AT3" secondAttribute="trailingMargin" id="Bea-fn-rEc"/>
+                                                <constraint firstItem="0bv-xm-AT3" firstAttribute="top" secondItem="Mcq-9u-ZVA" secondAttribute="top" constant="10" id="fKV-Ws-tgg"/>
+                                                <constraint firstItem="0bv-xm-AT3" firstAttribute="leading" secondItem="Mcq-9u-ZVA" secondAttribute="leadingMargin" id="fmm-iH-HYz"/>
+                                                <constraint firstAttribute="bottom" secondItem="0bv-xm-AT3" secondAttribute="bottom" constant="10" id="yZw-BQ-T1s"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="r1N-a0-wP6" id="nh4-Na-WZp"/>
+                                            <outlet property="urlLabel" destination="mHL-7H-7sN" id="vAj-X4-VBe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="y3h-nc-Czc" firstAttribute="top" secondItem="0DL-Yx-Vuq" secondAttribute="top" id="EDs-3Y-xWJ"/>
+                            <constraint firstItem="y3h-nc-Czc" firstAttribute="leading" secondItem="0DL-Yx-Vuq" secondAttribute="leading" id="bzQ-ut-f1Z"/>
+                            <constraint firstItem="0DL-Yx-Vuq" firstAttribute="bottom" secondItem="y3h-nc-Czc" secondAttribute="bottom" id="oT9-Jp-Wok"/>
+                            <constraint firstItem="0DL-Yx-Vuq" firstAttribute="trailing" secondItem="y3h-nc-Czc" secondAttribute="trailing" id="xMr-En-moG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0DL-Yx-Vuq"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="My repositories" id="CL9-K9-cEf"/>
+                    <connections>
+                        <outlet property="tableView" destination="y3h-nc-Czc" id="CNa-4P-Lhn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dnu-CO-O8B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2015" y="897"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="yBa-oM-5Tg">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="H3r-Cz-rKc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="1LC-ks-dxl"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uaR-UA-qqC">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jCL-nO-fv4" kind="relationship" relationship="rootViewController" id="pfw-8d-5an"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="php-WD-cHU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121" y="897"/>
         </scene>
     </scenes>
 </document>

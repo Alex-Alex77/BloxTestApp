@@ -5,13 +5,13 @@
 
 import Alamofire
 
-protocol ApiServiceType {
-    associatedtype T
-    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[T]>) -> Void)
+protocol GitHubApiServiceType {
+    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[Repository]>) -> Void)
 }
 
 enum GitHubAPIServiceError: Error {
     case network(error: Error)
+    case cancelled
     case apiProvidedError(reason: String)
     case objectSerialization(reason: String)
 }
@@ -20,9 +20,8 @@ final class GitHubApiService {
     private var currentRequest: DataRequest?
 }
 
-extension GitHubApiService: ApiServiceType {
-    func loadItems(_ urlRequest: URLRequestConvertible,
-                   completionHandler: @escaping (Result<[Repository]>) -> Void) {
+extension GitHubApiService: GitHubApiServiceType {
+    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[Repository]>) -> Void) {
 
         // Cancel previous request if there is one
         if let currentRequest = currentRequest {
@@ -31,10 +30,13 @@ extension GitHubApiService: ApiServiceType {
         }
 
         currentRequest = Alamofire.request(urlRequest)
-            .responseJSON(queue: .global(qos: .userInitiated)) { response in
-                let result = self.repositoriesFromResponse(response: response)
-                self.currentRequest = nil
+            .responseJSON(queue: .global(qos: .userInitiated)) { [weak self] response in
+                guard let strongSelf = self else { return }
+
+                if strongSelf.currentRequest == nil { return }
+                let result = strongSelf.repositoriesFromResponse(response: response)
                 DispatchQueue.main.async {
+                    strongSelf.currentRequest = nil
                     completionHandler(result)
                 }
         }
@@ -43,7 +45,11 @@ extension GitHubApiService: ApiServiceType {
     private func repositoriesFromResponse(response: DataResponse<Any>) -> Result<[Repository]> {
         if let error = response.result.error {
             print(error)
-            return .failure(GitHubAPIServiceError.network(error: error))
+            if error.localizedDescription.contains("cancelled") {
+                return .failure(GitHubAPIServiceError.cancelled)
+            } else {
+                return .failure(GitHubAPIServiceError.network(error: error))
+            }
         }
 
         // Check if we have JSON in response
