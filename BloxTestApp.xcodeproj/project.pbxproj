@@ -18,6 +18,7 @@
 		ABE981D820C93F83002D2497 /* GitHubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE981D720C93F83002D2497 /* GitHubRouter.swift */; };
 		ABE981DB20C945BE002D2497 /* GitHubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE981DA20C945BE002D2497 /* GitHubViewModel.swift */; };
 		ABE981DD20C945DF002D2497 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE981DC20C945DF002D2497 /* Repository.swift */; };
+		ABE981E120C94AA7002D2497 /* GitHubApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE981E020C94AA7002D2497 /* GitHubApiService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		ABE981D720C93F83002D2497 /* GitHubRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRouter.swift; sourceTree = "<group>"; };
 		ABE981DA20C945BE002D2497 /* GitHubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubViewModel.swift; sourceTree = "<group>"; };
 		ABE981DC20C945DF002D2497 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
+		ABE981E020C94AA7002D2497 /* GitHubApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubApiService.swift; sourceTree = "<group>"; };
 		E01D3586CA5F28C0887AE425 /* Pods-BloxTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloxTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp.release.xcconfig"; sourceTree = "<group>"; };
 		EBD1755BA1D7FD1FE7FA83DA /* Pods_BloxTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BloxTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE981D720C93F83002D2497 /* GitHubRouter.swift */,
+				ABE981E020C94AA7002D2497 /* GitHubApiService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				ABE981DB20C945BE002D2497 /* GitHubViewModel.swift in Sources */,
 				ABE981D820C93F83002D2497 /* GitHubRouter.swift in Sources */,
 				ABE981D620C93C7B002D2497 /* RepositoryCell.swift in Sources */,
+				ABE981E120C94AA7002D2497 /* GitHubApiService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

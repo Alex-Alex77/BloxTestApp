@@ -5,12 +5,25 @@
 
 import UIKit
 
-class GitHubViewModel: NSObject {
-    var repositories: [Repository] = [
-        Repository(name: "FirstName", url: "URL1"),
-        Repository(name: "SecondName", url: "URL2")
-    ]
+final class GitHubViewModel: NSObject {
+
+    // MARK: Public
+
+    var repositories: [Repository] = []
+    var updateList: (() -> Void)?
+
+    // MARK: Private
+
+    private let apiService: GitHubApiServiceType
+
+    // MARK: Initialization
+
+    init(apiService: GitHubApiServiceType = GitHubApiService()) {
+        self.apiService = apiService
+    }
 }
+
+// MARK: UITableViewDataSource
 
 extension GitHubViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -26,11 +39,30 @@ extension GitHubViewModel: UITableViewDataSource {
     }
 }
 
+// MARK: UITableViewDelegate
+
 extension GitHubViewModel: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
+
+// MARK: UISearchBarDelegate
 
 extension GitHubViewModel: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("You're trying to find repository:", searchBar.text ?? "")
+        guard let text = searchBar.text, !text.isEmpty else {
+            return
+        }
+        apiService.loadRepositories(GitHubRouter.search(text)) { result in
+            switch result {
+            case .success(let repositories):
+                self.repositories = repositories
+            case .failure(let error):
+                print("Error:", error)
+                self.repositories.removeAll()
+            }
+            self.updateList?()
+        }
     }
 }

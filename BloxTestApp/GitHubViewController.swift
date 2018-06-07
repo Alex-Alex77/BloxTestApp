@@ -5,7 +5,7 @@
 
 import UIKit
 
-class GitHubViewController: UIViewController {
+final class GitHubViewController: UIViewController {
 
     // MARK: Outlets
 
@@ -30,6 +30,9 @@ class GitHubViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = viewModel
         tableView.dataSource = viewModel
+        viewModel.updateList = { [weak self] in
+            self?.tableView.reloadData()
+        }
     }
 
     private func configureSearchBar() {
