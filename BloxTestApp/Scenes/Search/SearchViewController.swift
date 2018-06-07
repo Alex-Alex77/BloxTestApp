@@ -13,6 +13,7 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var backgroundView: UIView!
     @IBOutlet private weak var backgroundViewLabel: UILabel!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
 
     // MARK: ViewModel
 
@@ -27,6 +28,7 @@ final class SearchViewController: UIViewController {
         backgroundViewLabel.text = "Enter some text for loading repositories"
         configureTableView()
         configureSearchBar()
+        bindViewModel()
     }
 
     // MARK: Private
@@ -37,6 +39,13 @@ final class SearchViewController: UIViewController {
         // Used for not showing redundant separator lines
         tableView.tableFooterView = UIView()
         tableView.backgroundView = backgroundView
+    }
+
+    private func configureSearchBar() {
+        searchBar.delegate = viewModel
+    }
+
+    private func bindViewModel() {
         viewModel.updateList = { [weak self] success in
             guard let strongSelf = self else { return }
 
@@ -50,9 +59,13 @@ final class SearchViewController: UIViewController {
             strongSelf.backgroundView.isHidden = success
             strongSelf.tableView.reloadData()
         }
-    }
 
-    private func configureSearchBar() {
-        searchBar.delegate = viewModel
+        viewModel.isLoading = { [weak self] isLoading in
+            if isLoading {
+                self?.loadingIndicator.startAnimating()
+            } else {
+                 self?.loadingIndicator.stopAnimating()
+            }
+        }
     }
 }

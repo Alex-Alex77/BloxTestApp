@@ -68,13 +68,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-Fe-Ln0">
+                                <rect key="frame" x="178" y="331" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7fg-Dn-ppg" secondAttribute="bottom" id="82w-Qi-UBs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7fg-Dn-ppg" secondAttribute="trailing" id="ZHu-lh-1XZ"/>
                             <constraint firstItem="7fg-Dn-ppg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ge5-s0-F2F"/>
+                            <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jSS-6N-I1G"/>
                             <constraint firstItem="7fg-Dn-ppg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kvm-nj-hR7"/>
+                            <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lz1-N3-dEX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -82,6 +87,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="Efb-mn-fOm" id="sbq-NQ-goq"/>
                         <outlet property="backgroundViewLabel" destination="HEU-lj-czm" id="1E6-KB-e4b"/>
+                        <outlet property="loadingIndicator" destination="4Rd-Fe-Ln0" id="KwQ-fv-lBp"/>
                         <outlet property="searchBar" destination="71Q-iV-dX1" id="Jqh-55-CDK"/>
                         <outlet property="tableView" destination="7fg-Dn-ppg" id="13d-xc-dJX"/>
                     </connections>

@@ -11,6 +11,7 @@ final class SearchViewModel: NSObject {
 
     var repositories: [Repository] = []
     var updateList: ((Bool) -> Void)?
+    var isLoading: ((Bool) -> Void)?
 
     // MARK: Private
 
@@ -54,7 +55,9 @@ extension SearchViewModel: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {
             return
         }
+        isLoading?(true)
         apiService.loadItems(GitHubRouter.search(text)) { [weak self] result in
+            self?.isLoading?(false)
             switch result {
             case .success(let repositories):
                 self?.repositories = repositories
