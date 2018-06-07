@@ -46,7 +46,7 @@ final class SearchViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        viewModel.updateList = { [weak self] success in
+        viewModel.loadedAction = { [weak self] success in
             guard let strongSelf = self else { return }
 
             let backgroundLabelText: String

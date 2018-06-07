@@ -10,7 +10,7 @@ final class SearchViewModel: NSObject {
     // MARK: Public
 
     var repositories: [Repository] = []
-    var updateList: ((Bool) -> Void)?
+    var loadedAction: ((Bool) -> Void)?
     var isLoading: ((Bool) -> Void)?
 
     // MARK: Private
@@ -61,12 +61,12 @@ extension SearchViewModel: UISearchBarDelegate {
             switch result {
             case .success(let repositories):
                 self?.repositories = repositories
-                self?.updateList?(true)
+                self?.loadedAction?(true)
             case .failure(let error):
                 print("Error:", error)
                 guard let error = error as? GitHubAPIServiceError, case .cancelled = error else {
                     self?.repositories.removeAll()
-                    self?.updateList?(false)
+                    self?.loadedAction?(false)
                     return
                 }
             }
