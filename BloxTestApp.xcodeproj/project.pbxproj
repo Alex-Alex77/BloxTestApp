@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0637E3084DA32FE1818521C7 /* Pods_BloxTestApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBD1755BA1D7FD1FE7FA83DA /* Pods_BloxTestApp.framework */; };
 		AB391F5420C932C0003F911B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB391F5320C932C0003F911B /* AppDelegate.swift */; };
 		AB391F5620C932C0003F911B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB391F5520C932C0003F911B /* ViewController.swift */; };
 		AB391F5920C932C0003F911B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB391F5720C932C0003F911B /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43181E715E63CB5D623A07AA /* Pods-BloxTestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloxTestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AB391F5020C932C0003F911B /* BloxTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloxTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB391F5320C932C0003F911B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB391F5520C932C0003F911B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		AB391F5A20C932C1003F911B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB391F5D20C932C1003F911B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB391F5F20C932C1003F911B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E01D3586CA5F28C0887AE425 /* Pods-BloxTestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BloxTestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp.release.xcconfig"; sourceTree = "<group>"; };
+		EBD1755BA1D7FD1FE7FA83DA /* Pods_BloxTestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BloxTestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0637E3084DA32FE1818521C7 /* Pods_BloxTestApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2176F6258DB4EFF07359C479 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43181E715E63CB5D623A07AA /* Pods-BloxTestApp.debug.xcconfig */,
+				E01D3586CA5F28C0887AE425 /* Pods-BloxTestApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AB391F4720C932C0003F911B = {
 			isa = PBXGroup;
 			children = (
 				AB391F5220C932C0003F911B /* BloxTestApp */,
 				AB391F5120C932C0003F911B /* Products */,
+				2176F6258DB4EFF07359C479 /* Pods */,
+				C255EA4A3153FD6ECBA15FEA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +80,14 @@
 			path = BloxTestApp;
 			sourceTree = "<group>";
 		};
+		C255EA4A3153FD6ECBA15FEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBD1755BA1D7FD1FE7FA83DA /* Pods_BloxTestApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB391F6220C932C1003F911B /* Build configuration list for PBXNativeTarget "BloxTestApp" */;
 			buildPhases = (
+				567EC461ADD9BDAB9965B953 /* [CP] Check Pods Manifest.lock */,
 				AB391F4C20C932C0003F911B /* Sources */,
 				AB391F4D20C932C0003F911B /* Frameworks */,
 				AB391F4E20C932C0003F911B /* Resources */,
+				157B892E5652589D095CC817 /* [CP] Embed Pods Frameworks */,
+				A379BC6000C5BE60560B231E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,6 +156,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		157B892E5652589D095CC817 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		567EC461ADD9BDAB9965B953 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BloxTestApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A379BC6000C5BE60560B231E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BloxTestApp/Pods-BloxTestApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB391F4C20C932C0003F911B /* Sources */ = {
@@ -278,15 +359,13 @@
 		};
 		AB391F6320C932C1003F911B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43181E715E63CB5D623A07AA /* Pods-BloxTestApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WBB4QL456R;
 				INFOPLIST_FILE = BloxTestApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexalex.BloxTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -296,15 +375,13 @@
 		};
 		AB391F6420C932C1003F911B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E01D3586CA5F28C0887AE425 /* Pods-BloxTestApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WBB4QL456R;
 				INFOPLIST_FILE = BloxTestApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.alexalex.BloxTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
