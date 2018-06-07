@@ -23,13 +23,15 @@ final class GitHubApiService {
 extension GitHubApiService: GitHubApiServiceType {
     func loadRepositories(_ urlRequest: URLRequestConvertible,
                           completionHandler: @escaping (Result<[Repository]>) -> Void) {
+
+        // Cancel previous request if there is one
         if let currentRequest = currentRequest {
             currentRequest.cancel()
             self.currentRequest = nil
         }
 
         currentRequest = Alamofire.request(urlRequest)
-            .responseJSON(queue: DispatchQueue.global(qos: .userInitiated)) { response in
+            .responseJSON(queue: .global(qos: .userInitiated)) { response in
                 let result = self.repositoriesFromResponse(response: response)
                 self.currentRequest = nil
                 DispatchQueue.main.async {
@@ -64,6 +66,7 @@ extension GitHubApiService: GitHubApiServiceType {
             return .failure(GitHubAPIServiceError.objectSerialization(reason: reason))
         }
 
+        // Using new API from Swift 4 to parse objects from data
         do {
             let data = try JSONSerialization.data(withJSONObject: items, options: .prettyPrinted)
             let decoder = JSONDecoder()
