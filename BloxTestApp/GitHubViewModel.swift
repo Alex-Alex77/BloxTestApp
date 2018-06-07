@@ -14,11 +14,11 @@ final class GitHubViewModel: NSObject {
 
     // MARK: Private
 
-    private let apiService: GitHubApiServiceType
+    private let apiService: GitHubApiService
 
     // MARK: Initialization
 
-    init(apiService: GitHubApiServiceType = GitHubApiService()) {
+    init(apiService: GitHubApiService = GitHubApiService()) {
         self.apiService = apiService
     }
 }
@@ -54,7 +54,7 @@ extension GitHubViewModel: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {
             return
         }
-        apiService.loadRepositories(GitHubRouter.search(text)) { result in
+        apiService.loadItems(GitHubRouter.search(text)) { result in
             switch result {
             case .success(let repositories):
                 self.repositories = repositories

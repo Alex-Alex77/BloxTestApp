@@ -5,9 +5,9 @@
 
 import Alamofire
 
-protocol GitHubApiServiceType {
-    func loadRepositories(_ urlRequest: URLRequestConvertible,
-                          completionHandler: @escaping (Result<[Repository]>) -> Void)
+protocol ApiServiceType {
+    associatedtype T
+    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[T]>) -> Void)
 }
 
 enum GitHubAPIServiceError: Error {
@@ -20,9 +20,9 @@ final class GitHubApiService {
     private var currentRequest: DataRequest?
 }
 
-extension GitHubApiService: GitHubApiServiceType {
-    func loadRepositories(_ urlRequest: URLRequestConvertible,
-                          completionHandler: @escaping (Result<[Repository]>) -> Void) {
+extension GitHubApiService: ApiServiceType {
+    func loadItems(_ urlRequest: URLRequestConvertible,
+                   completionHandler: @escaping (Result<[Repository]>) -> Void) {
 
         // Cancel previous request if there is one
         if let currentRequest = currentRequest {
