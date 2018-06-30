@@ -8,6 +8,11 @@ import UIKit
 struct RepositoryCellViewModel {
     let name: String
     let url: String
+
+    init(repository: Repository) {
+        self.name = repository.name
+        self.url = repository.owner.url.absoluteString
+    }
 }
 
 class RepositoryCell: UITableViewCell {

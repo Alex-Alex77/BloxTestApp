@@ -6,80 +6,77 @@
 import Alamofire
 
 protocol GitHubApiServiceType {
-    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[Repository]>) -> Void)
+    func loadItems(_ urlRequest: URLRequestConvertible, onCompletion: @escaping (UIViewController.ItemsResult) -> Void)
 }
 
-enum GitHubAPIServiceError: Error {
-    case network(error: Error)
-    case cancelled
-    case apiProvidedError(reason: String)
-    case objectSerialization(reason: String)
+struct RepositoriesResponse: Codable {
+    let items: [Repository]
+    let incompleteResults: Bool
+    let totalCount: Int
 }
 
-final class GitHubApiService {
-    private var currentRequest: DataRequest?
+struct ErrorResponse: Error, Codable {
+    let message: String
+    let documentationUrl: URL
 }
 
-extension GitHubApiService: GitHubApiServiceType {
-    func loadItems(_ urlRequest: URLRequestConvertible, completionHandler: @escaping (Result<[Repository]>) -> Void) {
-
-        // Cancel previous request if there is one
-        if let currentRequest = currentRequest {
-            currentRequest.cancel()
-            self.currentRequest = nil
-        }
-
-        currentRequest = Alamofire.request(urlRequest)
-            .responseJSON(queue: .global(qos: .userInitiated)) { [weak self] response in
-                guard let strongSelf = self else { return }
-
-                if strongSelf.currentRequest == nil { return }
-                let result = strongSelf.repositoriesFromResponse(response: response)
-                DispatchQueue.main.async {
-                    strongSelf.currentRequest = nil
-                    completionHandler(result)
-                }
-        }
+extension ErrorResponse: LocalizedError {
+    public var errorDescription: String? {
+        return NSLocalizedString("Couldn't complete your request, try to change searched text", comment: "Response error")
     }
+}
 
-    private func repositoriesFromResponse(response: DataResponse<Any>) -> Result<[Repository]> {
-        if let error = response.result.error {
-            print(error)
-            if error.localizedDescription.contains("cancelled") {
-                return .failure(GitHubAPIServiceError.cancelled)
-            } else {
-                return .failure(GitHubAPIServiceError.network(error: error))
+final class GitHubApiService: GitHubApiServiceType {
+    var currentRequest: DataRequest?
+
+    func loadItems(_ urlRequest: URLRequestConvertible, onCompletion: @escaping (UIViewController.ItemsResult) -> Void) {
+
+        func fireErrorCompletion(_ error: Error?) {
+            onCompletion(UIViewController.ItemsResult(items: nil, error: error, currentPage: 0, pageCount: 0))
+        }
+
+        currentRequest?.cancel()
+
+        currentRequest = Alamofire.request(urlRequest).responseData { response in
+            if let error = response.error {
+                guard (error as NSError).code != NSURLErrorCancelled else {
+                    return
+                }
+                print(error)
+                fireErrorCompletion(error)
+                return
             }
-        }
 
-        // Check if we have JSON in response
-        guard let jsonDictionary = response.result.value as? [String: Any] else {
-            let reason = "Didn't get response as JSON from API"
-            print("Error:", reason)
-            return .failure(GitHubAPIServiceError.apiProvidedError(reason: reason))
-        }
+            guard let data = response.result.value else {
+                guard let error = response.error else {
+                    return
+                }
+                print(error)
+                fireErrorCompletion(error)
+                return
+            }
 
-        // Check for "message" errors in the JSON because this API does that
-        if let errorMessage = jsonDictionary["message"] as? String {
-            print("Error:", errorMessage)
-            return .failure(GitHubAPIServiceError.apiProvidedError(reason: errorMessage))
-        }
-
-        // Check we got repositories in JSON
-        guard let items = jsonDictionary["items"] as? [[String: Any]] else {
-            let reason = "Didn't get an array of repositories from JSON"
-            print("Error:", reason)
-            return .failure(GitHubAPIServiceError.objectSerialization(reason: reason))
-        }
-
-        // Using new API from Swift 4 to parse objects from data
-        do {
-            let data = try JSONSerialization.data(withJSONObject: items, options: .prettyPrinted)
             let decoder = JSONDecoder()
-            let repositories = try decoder.decode([Repository].self, from: data)
-            return .success(repositories)
-        } catch {
-            return .failure(error)
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            if let error = try? decoder.decode(ErrorResponse.self, from: data) {
+                print(error)
+                fireErrorCompletion(error)
+                return
+            }
+
+            do {
+                let result = try decoder.decode(RepositoriesResponse.self, from: data)
+                let repositoriesResult = UIViewController.ItemsResult(
+                    items: result.items,
+                    error: nil,
+                    currentPage: 1, //result.incompleteResults,
+                    pageCount: result.totalCount)
+                onCompletion(repositoriesResult)
+            } catch {
+                print(error)
+                fireErrorCompletion(error)
+            }
         }
     }
 }

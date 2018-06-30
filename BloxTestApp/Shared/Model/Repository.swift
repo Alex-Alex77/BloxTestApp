@@ -5,22 +5,11 @@
 
 import Foundation
 
-struct Repository: Decodable {
+struct Owner: Codable {
+    let url: URL
+}
+
+struct Repository: Codable {
     let name: String
-    let url: String
-
-    enum CodingKeys: String, CodingKey {
-        case name, owner
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        let owner = try container.decode(Owner.self, forKey: .owner)
-        url = owner.url
-    }
-
-    private struct Owner: Codable {
-        let url: String
-    }
+    let owner: Owner
 }

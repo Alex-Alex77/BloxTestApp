@@ -7,9 +7,9 @@ import Foundation
 import Alamofire
 
 enum GitHubRouter: URLRequestConvertible {
-    static let baseURLString = "https://api.github.com/"
+    static let endpoint = "https://api.github.com/"
 
-    case search(String)
+    case search(String, page: Int)
 
     var method: HTTPMethod {
         switch self {
@@ -24,15 +24,15 @@ enum GitHubRouter: URLRequestConvertible {
             relativePath = "search/repositories"
         }
 
-        var url = URL(string: GitHubRouter.baseURLString)!
+        var url = URL(string: GitHubRouter.endpoint)!
         url.appendPathComponent(relativePath)
         return url
     }
 
     var parameters: [String: Any]? {
         switch self {
-        case .search(let query):
-            return ["q": query]
+        case .search(let query, let page):
+            return ["q": query, "page": page]
         }
     }
 

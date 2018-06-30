@@ -15,7 +15,7 @@
         <!--Search repositories-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="SearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SearchViewController" customModule="BloxTestApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="RepositoriesViewController" customModule="BloxTestApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,14 +23,9 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7fg-Dn-ppg">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Enter repository you want to find" id="71Q-iV-dX1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RepositoryCell" rowHeight="105" id="9Eh-LF-FWI" customClass="RepositoryCell" customModule="BloxTestApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="105"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Eh-LF-FWI" id="ave-RB-dxM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="104.5"/>
@@ -68,8 +63,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-Fe-Ln0">
-                                <rect key="frame" x="178" y="331" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="fUl-tb-nO2">
+                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,28 +73,27 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7fg-Dn-ppg" secondAttribute="bottom" id="82w-Qi-UBs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7fg-Dn-ppg" secondAttribute="trailing" id="ZHu-lh-1XZ"/>
                             <constraint firstItem="7fg-Dn-ppg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ge5-s0-F2F"/>
-                            <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="jSS-6N-I1G"/>
                             <constraint firstItem="7fg-Dn-ppg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kvm-nj-hR7"/>
-                            <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="lz1-N3-dEX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search repositories" id="7qf-tI-t9A"/>
                     <connections>
-                        <outlet property="backgroundView" destination="Efb-mn-fOm" id="sbq-NQ-goq"/>
-                        <outlet property="backgroundViewLabel" destination="HEU-lj-czm" id="1E6-KB-e4b"/>
-                        <outlet property="loadingIndicator" destination="4Rd-Fe-Ln0" id="KwQ-fv-lBp"/>
-                        <outlet property="searchBar" destination="71Q-iV-dX1" id="Jqh-55-CDK"/>
+                        <outlet property="emptyView" destination="Efb-mn-fOm" id="7hP-s8-JLd"/>
+                        <outlet property="errorLabel" destination="0xX-6T-SCH" id="c3X-mP-eWa"/>
+                        <outlet property="errorView" destination="uaW-Dp-4We" id="ppD-FZ-3p0"/>
+                        <outlet property="loadingIndicator" destination="fUl-tb-nO2" id="HoN-oI-zqc"/>
+                        <outlet property="nextPageLoadingView" destination="wuK-S6-8GW" id="rMk-f4-0cA"/>
                         <outlet property="tableView" destination="7fg-Dn-ppg" id="13d-xc-dJX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <view contentMode="scaleToFill" id="Efb-mn-fOm">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Can't find repositories, try to change your request" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEU-lj-czm">
-                            <rect key="frame" x="15" y="0.0" width="210" height="128"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no repositories, try to change your request" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEU-lj-czm">
+                            <rect key="frame" x="15" y="0.0" width="210" height="200"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -112,6 +107,41 @@
                         <constraint firstItem="HEU-lj-czm" firstAttribute="top" secondItem="8UX-YS-eIm" secondAttribute="top" id="vUn-Wg-hxv"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="8UX-YS-eIm"/>
+                </view>
+                <view contentMode="scaleToFill" id="uaW-Dp-4We">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="200"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error loading repositories" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0xX-6T-SCH">
+                            <rect key="frame" x="15" y="0.0" width="210" height="200"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0xX-6T-SCH" firstAttribute="top" secondItem="5DT-bx-FOV" secondAttribute="top" id="1bi-Of-mEF"/>
+                        <constraint firstItem="5DT-bx-FOV" firstAttribute="bottom" secondItem="0xX-6T-SCH" secondAttribute="bottom" id="pbI-ST-ibR"/>
+                        <constraint firstItem="0xX-6T-SCH" firstAttribute="leading" secondItem="5DT-bx-FOV" secondAttribute="leading" constant="15" id="uci-jG-fac"/>
+                        <constraint firstItem="0xX-6T-SCH" firstAttribute="trailing" secondItem="5DT-bx-FOV" secondAttribute="trailing" constant="-15" id="wLv-f9-duB"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="5DT-bx-FOV"/>
+                </view>
+                <view contentMode="scaleToFill" id="wuK-S6-8GW">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4Rd-Fe-Ln0">
+                            <rect key="frame" x="110" y="15" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerY" secondItem="3Za-Jm-3jn" secondAttribute="centerY" id="UJw-TU-z5h"/>
+                        <constraint firstItem="4Rd-Fe-Ln0" firstAttribute="centerX" secondItem="3Za-Jm-3jn" secondAttribute="centerX" id="w9L-f3-p6x"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="3Za-Jm-3jn"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="2015.2" y="132.68365817091455"/>
@@ -141,6 +171,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="eEH-JB-F3N" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7kE-eL-NcC">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
